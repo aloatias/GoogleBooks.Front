@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BooksCatalogSearch } from './Helpers/BooksCatalogSearch';
+import { BooksCatalogSearch } from './Dtos/BooksCatalogSearch';
 import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Urls } from './Shared/BaseUrl';
 import { catchError } from 'rxjs/operators';
-import { BooksCatalogSearchResult } from './Dtos/BooksCatalogSearchResult';
+import { IBooksCatalogSearchResult } from './Dtos/IBooksCatalogSearchResult';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -22,9 +22,9 @@ export class BooksService {
     private _http: HttpClient) {
   }
 
-  GetBooksCatalog(booksCatalogSearch: BooksCatalogSearch) : Observable<BooksCatalogSearchResult> {
+  GetBooksCatalog(booksCatalogSearch: BooksCatalogSearch) : Observable<IBooksCatalogSearchResult> {
     return this._http
-      .post<BooksCatalogSearchResult>(Urls.BOOK_GETBOOKSCATALOG, booksCatalogSearch, httpOptions)
+      .post<IBooksCatalogSearchResult>(Urls.BOOK_GETBOOKSCATALOG, booksCatalogSearch, httpOptions)
       .pipe(catchError(this.handleError));
   }
 

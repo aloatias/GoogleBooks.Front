@@ -1,13 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { BooksService } from '../books.service';
-import { BooksCatalogSearch } from '../Helpers/BooksCatalogSearch';
+import { BooksCatalogSearch } from '../Dtos/BooksCatalogSearch';
+import { BooksDetailsForCatalog } from '../Dtos/BooksDetailsForCatalog';
 
 @Component({
   selector: 'app-books-catalog',
   templateUrl: './books-catalog.component.html',
   styleUrls: ['./books-catalog.component.css']
 })
+
 export class BooksCatalogComponent implements OnInit {
+  public booksCatalogSearchResult: BooksDetailsForCatalog[] = new Array<BooksDetailsForCatalog>();
+  public rowSpan: number = 3;
+  public colSpan: number = 2;
+  public color: string = "white";
+  public noImageAvailablePicturePath: string = "assets/no_image.png";
 
   constructor(
     private _booksService: BooksService) { }
@@ -21,11 +28,13 @@ export class BooksCatalogComponent implements OnInit {
 
     this._booksService.GetBooksCatalog(booksCatalogSearchOptions)
       .subscribe(
-        b => console.log(b)
+        b => {
+          this.booksCatalogSearchResult = this.booksCatalogSearchResult.concat(b.booksCatalog.bookDetails);
+        }
       );
   }
 
-  GetBooksCatalogSearchOptions() {
-    return  new BooksCatalogSearch("federer", 0, 40);
+  GetBooksCatalogSearchOptions(): BooksCatalogSearch{
+    return new BooksCatalogSearch("federer", 1, 40);
   }
 }

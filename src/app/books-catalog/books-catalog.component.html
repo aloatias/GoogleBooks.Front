@@ -1,1 +1,20 @@
-<p>books-catalog works!</p>
+<div class="container" style="margin: 20px 10px 20px 10px">
+    <mat-grid-list cols="12" rowHeight="100px">
+        <mat-grid-tile
+            *ngFor="let book of booksCatalogSearchResult"
+            [colspan]="colSpan"
+            [rowspan]="rowSpan"
+            [style.background]="color">
+
+            <a href="{{ book.selfLink }}">
+                <img src="{{ book.thumbnail != null ? book.thumbnail : noImageAvailablePicturePath }}" style="width: 160px;">
+
+                <mat-grid-tile-footer style="background-color: white; color: black;">
+                    <div style="margin-top: 20px;">
+                        <h4 style="text-align: center;">{{ book.title.length <= 60 ? book.title : book.title.substring(0, 59) + "..." }}</h4>
+                    </div>
+                </mat-grid-tile-footer>
+            </a>
+        </mat-grid-tile>
+      </mat-grid-list>    
+</div>
