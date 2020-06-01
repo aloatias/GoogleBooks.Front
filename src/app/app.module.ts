@@ -7,6 +7,7 @@ import { BooksCatalogComponent } from './books-catalog/books-catalog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule  } from '@angular/material/grid-list';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     HttpClientModule,
     BrowserAnimationsModule,
     MatGridListModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

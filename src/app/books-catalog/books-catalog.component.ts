@@ -24,6 +24,8 @@ export class BooksCatalogComponent implements OnInit {
 
   public pageSizeOptions: number[] = [5, 10, 25, 40];
 
+  public showSpinner:boolean;
+
   constructor(
     private _booksService: BooksService) { }
 
@@ -32,6 +34,8 @@ export class BooksCatalogComponent implements OnInit {
   }
 
   public getBooksCatalog() : void {
+    this.showSpinner = true;
+
     let booksCatalogSearchOptions = this.getBooksCatalogSearchOptions();
 
     this._booksService.getBooksCatalog(booksCatalogSearchOptions)
@@ -39,6 +43,8 @@ export class BooksCatalogComponent implements OnInit {
         b => {
           this.totalResults = b.pagingInfo.totalItems;
           this.booksCatalogSearchResult = b.booksCatalog.bookDetails;
+          
+          this.showSpinner = false;
         }
       );
   }
