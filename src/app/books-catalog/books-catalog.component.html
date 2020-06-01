@@ -1,6 +1,8 @@
-<mat-spinner [hidden]=!showSpinner style="position: absolute; margin: 25% 50% 25% 50%"></mat-spinner>
+<div [hidden]="!showSpinner">
+    <mat-spinner style="position: absolute; margin: 25% 50% 25% 50%"></mat-spinner>
+</div>
 
-<div class="container" style="margin: 10px 10px 10px 10px" [hidden]=showSpinner>
+<div class="container" style="margin: 10px 10px 10px 10px" [hidden]="showSpinner">
     <div class="row">
         <mat-grid-list cols="12" rowHeight="100px">
             <mat-grid-tile

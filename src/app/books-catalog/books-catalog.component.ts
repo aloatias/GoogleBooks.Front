@@ -64,7 +64,6 @@ export class BooksCatalogComponent implements OnInit {
     this.pageSize = event.pageSize;
 
     this.getBooksCatalog();
-
     return event;
   }
 
