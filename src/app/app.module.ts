@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BooksCatalogComponent } from './books-catalog/books-catalog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule  } from '@angular/material/grid-list';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { MatGridListModule  } from '@angular/material/grid-list';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatGridListModule 
+    MatGridListModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

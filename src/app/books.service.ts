@@ -22,7 +22,7 @@ export class BooksService {
     private _http: HttpClient) {
   }
 
-  GetBooksCatalog(booksCatalogSearch: BooksCatalogSearch) : Observable<IBooksCatalogSearchResult> {
+  getBooksCatalog(booksCatalogSearch: BooksCatalogSearch) : Observable<IBooksCatalogSearchResult> {
     return this._http
       .post<IBooksCatalogSearchResult>(Urls.BOOK_GETBOOKSCATALOG, booksCatalogSearch, httpOptions)
       .pipe(catchError(this.handleError));
