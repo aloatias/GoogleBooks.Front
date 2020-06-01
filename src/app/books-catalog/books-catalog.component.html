@@ -1,36 +1,32 @@
-<div *ngIf="showSpinner;else books_catalog">
-    <mat-spinner style="position: absolute; margin: 25% 50% 25% 50%"></mat-spinner>
-</div>
+<mat-spinner [hidden]=!showSpinner style="position: absolute; margin: 25% 50% 25% 50%"></mat-spinner>
 
-<ng-template #books_catalog>
-    <div class="container" style="margin: 10px 10px 10px 10px">
-        <div class="row">
-            <mat-grid-list cols="12" rowHeight="100px">
-                <mat-grid-tile
-                    *ngFor="let book of booksCatalogSearchResult"
-                    [colspan]="colSpan"
-                    [rowspan]="rowSpan"
-                    [style.background]="color">
-        
-                    <a href="{{ book.infoLink }}" target="blank">
-                        <img src="{{ book.thumbnail != null ? book.thumbnail : noImageAvailablePicturePath }}" style="width: 160px;">
-        
-                        <mat-grid-tile-footer style="background-color: white; color: black;">
-                            <div style="margin-top: 20px;">
-                                <h4 style="text-align: center;">{{ book.title.length <= 60 ? book.title : book.title.substring(0, 59) + "..." }}</h4>
-                            </div>
-                        </mat-grid-tile-footer>
-                    </a>
-                </mat-grid-tile>
-              </mat-grid-list>   
-        </div>
-        
-        <div class="row" style="margin-top: 10px;">
-           <mat-paginator [length]="totalResults"
-                        [pageSize]="pageSize"
-                        [pageSizeOptions]="pageSizeOptions"
-                        (page)="pageEvent = pageBooksCatalog($event)">
-            </mat-paginator>
-        </div>
+<div class="container" style="margin: 10px 10px 10px 10px" [hidden]=showSpinner>
+    <div class="row">
+        <mat-grid-list cols="12" rowHeight="100px">
+            <mat-grid-tile
+                *ngFor="let book of booksCatalogSearchResult"
+                [colspan]="colSpan"
+                [rowspan]="rowSpan"
+                [style.background]="color">
+    
+                <a href="{{ book.infoLink }}" target="blank">
+                    <img src="{{ book.thumbnail != null ? book.thumbnail : noImageAvailablePicturePath }}" style="width: 160px;">
+    
+                    <mat-grid-tile-footer style="background-color: white; color: black;">
+                        <div style="margin-top: 20px;">
+                            <h4 style="text-align: center;">{{ book.title.length <= 60 ? book.title : book.title.substring(0, 59) + "..." }}</h4>
+                        </div>
+                    </mat-grid-tile-footer>
+                </a>
+            </mat-grid-tile>
+            </mat-grid-list>   
     </div>
-</ng-template>
+    
+    <div class="row" style="margin-top: 10px;">
+        <mat-paginator [length]="totalResults"
+                    [pageSize]="pageSize"
+                    [pageSizeOptions]="pageSizeOptions"
+                    (page)="pageEvent = pageBooksCatalog($event)">
+        </mat-paginator>
+    </div>
+</div>
