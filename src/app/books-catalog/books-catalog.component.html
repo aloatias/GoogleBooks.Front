@@ -3,10 +3,10 @@
 </div>
 
 <div [hidden]="showSpinner">
-    <mat-grid-list cols="13" rowHeight="70" style="background-color: #424242; padding-bottom: 5px;">
-        <mat-grid-tile [colspan]="3"></mat-grid-tile>
+    <mat-grid-list cols="12" rowHeight="70" style="background-color: #424242; padding-bottom: 5px;">
+        <mat-grid-tile [colspan]="2"></mat-grid-tile>
         
-        <mat-grid-tile [colspan]="7">
+        <mat-grid-tile [colspan]="8">
             <input [(ngModel)]="keywords" type="text" placeholder="Ex: Angular development" aria-label="Ex: Angular development" (keyup.enter)="getBooksCatalog()" style="border-radius: 4px 4px 4px 4px; height: 32px; width: 100%; font-size: 15px; font-family: inherit;">
         
             <button mat-button id="searchButton" [disabled]="keywords.length < 2" (click)="getBooksCatalog()" style="background-color: #F3A847; border-radius: 4px 4px 4px 4px; margin-left: 5px;">
@@ -15,6 +15,8 @@
                 </span>
             </button>
         </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="2"></mat-grid-tile>
     </mat-grid-list>
 
     <div style="margin: 10px 30px 30px 30px" [hidden]="showNoResultsMessage">
