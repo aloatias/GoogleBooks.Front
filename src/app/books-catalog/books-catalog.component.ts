@@ -17,7 +17,7 @@ export class BooksCatalogComponent implements OnInit {
   public color: string = "white";
   public noImageAvailablePicturePath: string = "assets/no_image.png";
 
-  public keywords: string = "roger federer";
+  public keywords: string = "Angular development";
   public totalResults: number;
   public pageSize: number = 40;
   public pageNumber: number = 0;
@@ -40,19 +40,24 @@ export class BooksCatalogComponent implements OnInit {
 
     let booksCatalogSearchOptions = this.getBooksCatalogSearchOptions();
 
-    this._booksService.getBooksCatalog(booksCatalogSearchOptions)
+    try {
+      this._booksService.getBooksCatalog(booksCatalogSearchOptions)
       .subscribe(
         b => {
-          this.showSpinner = false;
-
           if (b.pagingInfo.totalItems > 0) {
             this.totalResults = b.pagingInfo.totalItems;
             this.booksCatalogSearchResult = b.booksCatalog.bookDetails;;
           }
 
           this.showNoResultsMessage = b.pagingInfo.totalItems == 0;
+
+          this.showSpinner = false;
         }
       );
+    }
+    catch(error) {
+      this.showSpinner = false;
+    }
   }
 
   private getBooksCatalogSearchOptions(): BooksCatalogSearch {

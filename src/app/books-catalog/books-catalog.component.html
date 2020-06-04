@@ -1,19 +1,19 @@
 <div [hidden]="!showSpinner">
-    <mat-spinner style="position: absolute; margin: 25% 50% 25% 50%"></mat-spinner>
+    <mat-spinner style="position: absolute; margin: 23% 45%"></mat-spinner>
 </div>
 
 <div [hidden]="showSpinner">
-    <div style="background-color: #424242; height: 60px; padding: 10px 10px 0px 10px;">
-        <input [(ngModel)]="keywords" type="text" placeholder="Ex: Angular development" aria-label="Ex: Angular development" (keyup.enter)="getBooksCatalog()" style="border-radius: 4px 4px 4px 4px; height: 25px; width: 90%; ">
+    <div style="background-color: #424242; padding: 20px 0px 25px 0px; text-align: center;">
+        <input [(ngModel)]="keywords" type="text" placeholder="Ex: Angular development" aria-label="Ex: Angular development" (keyup.enter)="getBooksCatalog()" style="border-radius: 4px 4px 4px 4px; height: 26px; width: 86%; ">
         
-        <button style="background-color: yellow; border-radius: 4px 4px 4px 4px; margin-left: 5px;" (click)="getBooksCatalog()">
+        <button id="searchButton" (click)="getBooksCatalog()" style="background-color: #F3A847; border-radius: 4px 4px 4px 4px; margin-left: 5px; vertical-align: bottom;">
             <span class="material-icons" (click)="getBooksCatalog()">
                 search
             </span>
         </button>
     </div>
 
-    <div style="margin: 10px 10px 10px 10px" [hidden]="showNoResultsMessage">
+    <div style="margin: 10px 30px 30px 30px" [hidden]="showNoResultsMessage">
         <mat-grid-list cols="12" rowHeight="100px">
             <mat-grid-tile
                 *ngFor="let book of booksCatalogSearchResult"
@@ -34,7 +34,7 @@
         </mat-grid-list>   
     </div>
 
-    <div [hidden]="!showNoResultsMessage" style="height: 100px; text-align: center; margin: 20% 0px 19% 0px;">
+    <div [hidden]="!showNoResultsMessage" style="text-align: center; margin: 20% 0px 20% 0px;">
         <h2>No results were found</h2>
     </div>
     
