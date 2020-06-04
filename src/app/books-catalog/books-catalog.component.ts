@@ -26,6 +26,7 @@ export class BooksCatalogComponent implements OnInit {
   public pageSizeOptions: number[] = [5, 10, 25, 40];
 
   public showSpinner: boolean;
+  public showNoResultsMessage: boolean = false;
 
   constructor(
     private _booksService: BooksService) {}
@@ -42,10 +43,14 @@ export class BooksCatalogComponent implements OnInit {
     this._booksService.getBooksCatalog(booksCatalogSearchOptions)
       .subscribe(
         b => {
-          this.totalResults = b.pagingInfo.totalItems;
-          this.booksCatalogSearchResult = b.booksCatalog.bookDetails;
-
           this.showSpinner = false;
+
+          if (b.pagingInfo.totalItems > 0) {
+            this.totalResults = b.pagingInfo.totalItems;
+            this.booksCatalogSearchResult = b.booksCatalog.bookDetails;;
+          }
+
+          this.showNoResultsMessage = b.pagingInfo.totalItems == 0;
         }
       );
   }

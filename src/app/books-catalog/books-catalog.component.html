@@ -2,25 +2,18 @@
     <mat-spinner style="position: absolute; margin: 25% 50% 25% 50%"></mat-spinner>
 </div>
 
-<div class="container">
-    <div class="row" style="background-color: #424242; height: 56px;">
-        <input [(ngModel)]="keywords" type="text" placeholder="Search keywords" aria-label="Search keywords" style="vertical-align: sub; height: 25px;">
-        <div class="input-group-append">
-            <span class="material-icons">
-                search
-            </span>
-        </div>
-        
-        <!-- <mat-form-field class="example-form-field">
-            <mat-label>Search</mat-label>
-            <input matInput type="text" [(ngModel)]="keywords" style="background-color: white;">
-            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="keywords=''">
-              <mat-icon>close</mat-icon>
+<div [hidden]="showSpinner">
+    <div style="background-color: #424242; height: 60px; padding: 10px 10px 0px 10px;">
+            <input [(ngModel)]="keywords" type="text" placeholder="Ex: Angular development" aria-label="Ex: Angular development" (keyup.enter)="getBooksCatalog()" style="border-radius: 4px 4px 4px 4px; height: 25px; width: 90%; ">
+            
+            <button style="background-color: yellow; border-radius: 4px 4px 4px 4px; margin-left: 5px;" (click)="getBooksCatalog()">
+                <span class="material-icons" (click)="getBooksCatalog()">
+                    search
+                </span>
             </button>
-        </mat-form-field> -->
     </div>
 
-    <div class="row" style="margin: 10px 10px 10px 10px" [hidden]="showSpinner">
+    <div style="margin: 10px 10px 10px 10px" [hidden]="showNoResultsMessage">
         <mat-grid-list cols="12" rowHeight="100px">
             <mat-grid-tile
                 *ngFor="let book of booksCatalogSearchResult"
@@ -38,10 +31,14 @@
                     </mat-grid-tile-footer>
                 </a>
             </mat-grid-tile>
-            </mat-grid-list>   
+        </mat-grid-list>   
+    </div>
+
+    <div [hidden]="!showNoResultsMessage" style="height: 100px; text-align: center; margin: 20% 0px 19% 0px;">
+        <h2>No results were found</h2>
     </div>
     
-    <div class="row" style="margin-top: 10px;">
+    <div style="margin-top: 10px;">
         <mat-paginator [length]="totalResults"
                     [pageSize]="pageSize"
                     [pageSizeOptions]="pageSizeOptions"
