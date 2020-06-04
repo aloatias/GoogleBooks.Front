@@ -29,19 +29,24 @@ export class BooksCatalogComponent implements OnInit {
   public showNoResultsMessage: boolean = false;
 
   constructor(
-    private _booksService: BooksService) {}
+    private _booksService: BooksService) { }
 
   ngOnInit(): void {
     this.getBooksCatalog();
   }
 
   public getBooksCatalog(): void {
+    if (this.keywords.length < 2)
+    {
+      alert("You have to enter at least a two letter long keyword");
+      return
+    }
+
     this.showSpinner = true;
 
     let booksCatalogSearchOptions = this.getBooksCatalogSearchOptions();
 
-    try {
-      this._booksService.getBooksCatalog(booksCatalogSearchOptions)
+    this._booksService.getBooksCatalog(booksCatalogSearchOptions)
       .subscribe(
         b => {
           if (b.pagingInfo.totalItems > 0) {
@@ -54,10 +59,6 @@ export class BooksCatalogComponent implements OnInit {
           this.showSpinner = false;
         }
       );
-    }
-    catch(error) {
-      this.showSpinner = false;
-    }
   }
 
   private getBooksCatalogSearchOptions(): BooksCatalogSearch {
