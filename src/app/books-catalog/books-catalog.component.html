@@ -4,13 +4,13 @@
 
 <div [hidden]="showSpinner">
     <div style="background-color: #424242; height: 60px; padding: 10px 10px 0px 10px;">
-            <input [(ngModel)]="keywords" type="text" placeholder="Ex: Angular development" aria-label="Ex: Angular development" (keyup.enter)="getBooksCatalog()" style="border-radius: 4px 4px 4px 4px; height: 25px; width: 90%; ">
-            
-            <button style="background-color: yellow; border-radius: 4px 4px 4px 4px; margin-left: 5px;" (click)="getBooksCatalog()">
-                <span class="material-icons" (click)="getBooksCatalog()">
-                    search
-                </span>
-            </button>
+        <input [(ngModel)]="keywords" type="text" placeholder="Ex: Angular development" aria-label="Ex: Angular development" (keyup.enter)="getBooksCatalog()" style="border-radius: 4px 4px 4px 4px; height: 25px; width: 90%; ">
+        
+        <button style="background-color: yellow; border-radius: 4px 4px 4px 4px; margin-left: 5px;" (click)="getBooksCatalog()">
+            <span class="material-icons" (click)="getBooksCatalog()">
+                search
+            </span>
+        </button>
     </div>
 
     <div style="margin: 10px 10px 10px 10px" [hidden]="showNoResultsMessage">
