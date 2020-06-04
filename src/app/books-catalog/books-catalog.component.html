@@ -3,15 +3,19 @@
 </div>
 
 <div [hidden]="showSpinner">
-    <div style="background-color: #424242; padding: 20px 0px 25px 0px; text-align: center;">
-        <input [(ngModel)]="keywords" type="text" placeholder="Ex: Angular development" aria-label="Ex: Angular development" (keyup.enter)="getBooksCatalog()" style="border-radius: 4px 4px 4px 4px; height: 26px; width: 86%; ">
+    <mat-grid-list cols="12" rowHeight="70" style="background-color: #424242; padding-bottom: 5px;">
+        <mat-grid-tile [colspan]="2"></mat-grid-tile>
         
-        <button id="searchButton" (click)="getBooksCatalog()" style="background-color: #F3A847; border-radius: 4px 4px 4px 4px; margin-left: 5px; vertical-align: bottom;">
-            <span class="material-icons" (click)="getBooksCatalog()">
-                search
-            </span>
-        </button>
-    </div>
+        <mat-grid-tile [colspan]="8">
+            <input [(ngModel)]="keywords" type="text" placeholder="Ex: Angular development" aria-label="Ex: Angular development" (keyup.enter)="getBooksCatalog()" style="border-radius: 4px 4px 4px 4px; height: 30px; width: 100%;">
+        
+            <button mat-button id="searchButton" [disabled]="keywords.length < 2" (click)="getBooksCatalog()" style="background-color: #F3A847; border-radius: 4px 4px 4px 4px; margin-left: 5px;">
+                <span class="material-icons">
+                    search
+                </span>
+            </button>
+        </mat-grid-tile>
+    </mat-grid-list>
 
     <div style="margin: 10px 30px 30px 30px" [hidden]="showNoResultsMessage">
         <mat-grid-list cols="12" rowHeight="100px">
@@ -34,7 +38,7 @@
         </mat-grid-list>   
     </div>
 
-    <div [hidden]="!showNoResultsMessage" style="text-align: center; margin: 20% 0px 20% 0px;">
+    <div [hidden]="!showNoResultsMessage" style="text-align: center; margin: 21% 0px 21% 0px;">
         <h2>No results were found</h2>
     </div>
     
