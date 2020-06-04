@@ -7,7 +7,7 @@
         <mat-grid-tile [colspan]="3"></mat-grid-tile>
         
         <mat-grid-tile [colspan]="7">
-            <input [(ngModel)]="keywords" type="text" placeholder="Ex: Angular development" aria-label="Ex: Angular development" (keyup.enter)="getBooksCatalog()" style="border-radius: 4px 4px 4px 4px; height: 32px; width: 100%;">
+            <input [(ngModel)]="keywords" type="text" placeholder="Ex: Angular development" aria-label="Ex: Angular development" (keyup.enter)="getBooksCatalog()" style="border-radius: 4px 4px 4px 4px; height: 32px; width: 100%; font-size: 15px; font-family: inherit;">
         
             <button mat-button id="searchButton" [disabled]="keywords.length < 2" (click)="getBooksCatalog()" style="background-color: #F3A847; border-radius: 4px 4px 4px 4px; margin-left: 5px;">
                 <span class="material-icons">
