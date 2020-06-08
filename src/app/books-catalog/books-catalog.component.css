@@ -1,3 +1,7 @@
 .book-item {
     cursor: pointer;
 }
+
+::ng-deep .mat-form-field-infix {
+    background-color: white;
+}

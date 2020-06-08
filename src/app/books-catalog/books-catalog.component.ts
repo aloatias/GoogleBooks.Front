@@ -83,8 +83,9 @@ export class BooksCatalogComponent implements OnInit {
 
   openDialog(bookId: string) : void {
     const dialogRef = this._dialog.open(BookDetailsComponent, {
-      width: '250px',
-      data: { bookId: bookId }
+      width: "1000px",
+      height: "800px",
+      data: { id: bookId }
     });
 
     dialogRef.afterClosed().subscribe(result => {

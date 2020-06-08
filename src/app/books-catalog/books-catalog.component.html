@@ -3,7 +3,7 @@
 </div>
 
 <div [hidden]="showSpinner">
-    <mat-grid-list cols="12" rowHeight="70" style="background-color: #424242; padding-bottom: 5px;">
+    <mat-grid-list cols="12" rowHeight="70" style="background-color: black; padding-bottom: 5px;">
         <mat-grid-tile [colspan]="2"></mat-grid-tile>
         
         <mat-grid-tile [colspan]="8">
@@ -44,8 +44,8 @@
         <h2>No results were found</h2>
     </div>
     
-    <div style="margin-top: 10px;">
-        <mat-paginator [length]="totalResults"
+    <div id="paginator" style="margin-top: 10px;">
+        <mat-paginator style="background-color: black; color: white" [length]="totalResults"
                     [pageSize]="pageSize"
                     [pageSizeOptions]="pageSizeOptions"
                     (page)="pageEvent = pageBooksCatalog($event)">

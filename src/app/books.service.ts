@@ -6,6 +6,7 @@ import { Urls } from './Shared/BaseUrl';
 import { catchError } from 'rxjs/operators';
 import { IBooksCatalogSearchResult } from './Dtos/IBooksCatalogSearchResult';
 import { BooksCatalogComponent } from './books-catalog/books-catalog.component';
+import { IBookDetails } from './Dtos/IBookDetails';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -26,6 +27,12 @@ export class BooksService {
   getBooksCatalog(booksCatalogSearch: BooksCatalogSearch) : Observable<IBooksCatalogSearchResult> {
     return this._http
       .post<IBooksCatalogSearchResult>(Urls.BOOK_GETBOOKSCATALOG, booksCatalogSearch, httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+  getBookDetails(id: string) : Observable<IBookDetails>{
+    return this._http
+      .get<IBookDetails>(Urls.BOOK_GETBOOKDETAILS + id)
       .pipe(catchError(this.handleError));
   }
 

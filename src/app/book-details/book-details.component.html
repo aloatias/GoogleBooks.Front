@@ -1,4 +1,15 @@
-<h1 mat-dialog-title>Hi {{ data.bookId }}</h1>
-<div mat-dialog-content>
-    <p>book-details works!</p>
-</div>
+<form [formGroup]="bookForm">
+    <h1 mat-dialog-title>{{ bookForm.value.title }}</h1>
+
+    <div mat-dialog-content>
+        <mat-grid-list cols="12">
+            <mat-grid-tile [colspan]="4">
+                <img src="{{ bookForm.value.smallThumbnail }}" style="width: 160px;">
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="9">
+
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</form>
