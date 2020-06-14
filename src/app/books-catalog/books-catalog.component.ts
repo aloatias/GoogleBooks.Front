@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, InjectionToken } from '@angular/core';
 import { BooksService } from '../books.service';
 import { BooksCatalogSearch } from '../Dtos/BooksCatalogSearch';
 import { BooksDetailsForCatalog } from '../Dtos/BooksDetailsForCatalog';
 import { PageEvent } from '@angular/material/paginator';
+import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material/dialog';
+import { BookDetailsComponent } from '../book-details/book-details.component';
 
 @Component({
   selector: 'app-books-catalog',
@@ -29,15 +31,15 @@ export class BooksCatalogComponent implements OnInit {
   public showNoResultsMessage: boolean = false;
 
   constructor(
-    private _booksService: BooksService) { }
+    private _booksService: BooksService,
+    private _dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getBooksCatalog();
   }
 
   public getBooksCatalog(): void {
-    if (this.keywords.length < 2)
-    {
+    if (this.keywords.length < 2) {
       alert("You have to enter at least a two letter long keyword");
       return
     }
@@ -65,17 +67,29 @@ export class BooksCatalogComponent implements OnInit {
     return new BooksCatalogSearch(this.keywords, this.pageNumber, this.pageSize);
   }
 
-  public setPageSizeOptions(setPageSizeOptionsInput: string): void {
+  private setPageSizeOptions(setPageSizeOptionsInput: string): void {
     if (setPageSizeOptionsInput) {
-      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => + str);
     }
   }
 
-  public pageBooksCatalog(event: PageEvent): PageEvent {
+  public pageBooksCatalog(event: PageEvent) : PageEvent {
     this.pageNumber = event.pageIndex;
     this.pageSize = event.pageSize;
 
     this.getBooksCatalog();
     return event;
+  }
+
+  openDialog(bookId: string) : void {
+    const dialogRef = this._dialog.open(BookDetailsComponent, {
+      width: "1000px",
+      height: "800px",
+      data: { id: bookId }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }

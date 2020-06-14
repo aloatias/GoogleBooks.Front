@@ -12,12 +12,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { BookDetailsComponent } from './book-details/book-details.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BooksCatalogComponent
+    BooksCatalogComponent,
+    BookDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatIconModule,
     FormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
