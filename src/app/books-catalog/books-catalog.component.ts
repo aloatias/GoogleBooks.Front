@@ -1,4 +1,4 @@
-import { Component, OnInit, InjectionToken } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BooksService } from '../books.service';
 import { BooksCatalogSearch } from '../Dtos/BooksCatalogSearch';
 import { BooksDetailsForCatalog } from '../Dtos/BooksDetailsForCatalog';
@@ -65,12 +65,6 @@ export class BooksCatalogComponent implements OnInit {
 
   private getBooksCatalogSearchOptions(): BooksCatalogSearch {
     return new BooksCatalogSearch(this.keywords, this.pageNumber, this.pageSize);
-  }
-
-  private setPageSizeOptions(setPageSizeOptionsInput: string): void {
-    if (setPageSizeOptionsInput) {
-      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => + str);
-    }
   }
 
   public pageBooksCatalog(event: PageEvent) : PageEvent {
