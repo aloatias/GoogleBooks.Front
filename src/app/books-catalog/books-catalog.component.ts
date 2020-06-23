@@ -3,8 +3,6 @@ import { BooksService } from '../books.service';
 import { BooksCatalogSearch } from '../Dtos/BooksCatalogSearch';
 import { BooksDetailsForCatalog } from '../Dtos/BooksDetailsForCatalog';
 import { PageEvent } from '@angular/material/paginator';
-import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material/dialog';
-import { BookDetailsComponent } from '../book-details/book-details.component';
 
 @Component({
   selector: 'app-books-catalog',
@@ -30,9 +28,10 @@ export class BooksCatalogComponent implements OnInit {
   public showSpinner: boolean;
   public showNoResultsMessage: boolean = false;
 
+  public bookId: string;
+
   constructor(
-    private _booksService: BooksService,
-    private _dialog: MatDialog) { }
+    private _booksService: BooksService) { }
 
   ngOnInit(): void {
     this.getBooksCatalog();
@@ -73,17 +72,5 @@ export class BooksCatalogComponent implements OnInit {
 
     this.getBooksCatalog();
     return event;
-  }
-
-  openDialog(bookId: string) : void {
-    const dialogRef = this._dialog.open(BookDetailsComponent, {
-      width: "1000px",
-      height: "800px",
-      data: { id: bookId }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
   }
 }

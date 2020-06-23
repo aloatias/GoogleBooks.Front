@@ -1,8 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IBookId } from '../Dtos/IBookId';
+import { Component, OnInit, Input } from '@angular/core';
 import { BooksService } from '../books.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-book-details',
@@ -39,7 +38,7 @@ export class BookDetailsComponent implements OnInit {
   });
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: IBookId,
+    private _route: ActivatedRoute,
     private _bookService: BooksService) { }
 
   ngOnInit(): void {
@@ -47,9 +46,10 @@ export class BookDetailsComponent implements OnInit {
   }
   
   private getBookDetails() : void {
-    this._bookService.getBookDetails(this.data.id)
-    .subscribe(book => {
-      this.bookForm.patchValue(book)
+    this._route.paramMap.subscribe(params => {
+      this._bookService.getBookDetails(params.get('id')).subscribe(book => {
+        this.bookForm.patchValue(book)
+      });
     });
   }
 }

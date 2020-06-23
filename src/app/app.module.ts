@@ -12,9 +12,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -34,8 +34,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     FormsModule,
     MatButtonModule,
-    MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot([
+      { path: '', redirectTo: 'books/catalog', pathMatch: 'full' },
+      { path: 'books/catalog', component: BooksCatalogComponent },
+      { path: 'books/details/:id', component: BookDetailsComponent },
+      { path: '**', redirectTo:'books/catalog', pathMatch: 'full' }
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
