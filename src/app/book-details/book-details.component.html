@@ -1,17 +1,24 @@
 <form [formGroup]="bookForm">
     <h1 style="text-align: center; padding-top: 50px;">{{ bookForm.value.title }}</h1>
     
-    <div style="text-align: center;">
-       {{ authorsText }}
+    <div style="text-align: center; font-size: small;">
+        {{ authorsText }}
 
         <p>From {{ bookForm.value.publisher }}</p>
     </div>
 
-    <div class="container" fxLayout fxLayout.xs="column" fxLayoutGap="50px" style="margin: 50px 50px 50px 50px">
-        <div class="item item-1">
-            <img src="{{ bookForm.value.thumbnail != null ? bookForm.value.thumbnail : noImageAvailablePicturePath }}">
+    <div class="body" style="margin: 50px">
+        <div class="container" fxLayout fxLayout.xs="column" fxLayoutGap="50px" >
+            <div class="item item-1">
+                <img src="{{ bookForm.value.thumbnail != null ? bookForm.value.thumbnail : noImageAvailablePicturePath }}">
+            </div>
+            
+            <div fxLayout.xs="column">
+                <div class="item item-1" [innerHTML]="bookForm.value.description"></div>
+                <div class="item item-2">
+                    <p><a href="{{ bookForm.value.webReaderLink }}">Read more...</a></p>
+                </div>
+            </div>
         </div>
-        
-        <div class="item item-2" [innerHTML]="bookForm.value.description"></div>
     </div>
 </form>

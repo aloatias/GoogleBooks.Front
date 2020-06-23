@@ -11,8 +11,12 @@ import { ActivatedRoute } from '@angular/router';
 export class BookDetailsComponent implements OnInit {
   public noImageAvailablePicturePath: string = "assets/no_image.png";
 
+  // Authors text variables
   public authorsText: string = "Written by ";
+  private _commaSeparator: string = ", ";
+  private _andSeparator: string = " and ";
 
+  // BookDetails form
   public bookForm = new FormGroup({
     id: new FormControl(''),
     title: new FormControl(''),
@@ -55,12 +59,14 @@ export class BookDetailsComponent implements OnInit {
         for (let i = 0; i < book.authors.length; i++) {
           this.authorsText += book.authors[i];
 
-          if (i + 1 < book.authors.length - 1) {
-            this.authorsText += ", ";
-          } else if (i < book.authors.length - 1){
-            this.authorsText += " and ";
+          if (i + 1 < book.authors.length) {
+            this.authorsText += this._commaSeparator;
           }
         }
+
+        // Replace last ", " for " and "
+        var n = this.authorsText.lastIndexOf(this._commaSeparator);
+        this.authorsText =  this.authorsText.slice(0, n) +  this.authorsText.slice(n).replace(this._commaSeparator, this._andSeparator);
       });
     });
   }
