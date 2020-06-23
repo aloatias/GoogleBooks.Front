@@ -39,7 +39,6 @@ export class BookDetailsComponent implements OnInit {
   });
 
   constructor(
-    private _dialogRef: MatDialogRef<BookDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: IBookId,
     private _bookService: BooksService) { }
 
@@ -47,10 +46,10 @@ export class BookDetailsComponent implements OnInit {
     this.getBookDetails();
   }
   
-  getBookDetails() : void {
+  private getBookDetails() : void {
     this._bookService.getBookDetails(this.data.id)
-    .subscribe(b => {
-      this.bookForm.patchValue(b)
+    .subscribe(book => {
+      this.bookForm.patchValue(book)
     });
   }
 }
