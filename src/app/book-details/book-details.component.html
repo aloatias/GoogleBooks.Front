@@ -1,7 +1,7 @@
 <form [formGroup]="bookForm">
     <h1 style="text-align: center;">{{ bookForm.value.title }}</h1>
 
-    <mat-grid-list cols="5" [rowHeight]="fit">
+    <mat-grid-list cols="5" [rowHeight]="">
         <mat-grid-tile [rowspan]="1" [colspan]="1">
             <img src="{{ bookForm.value.thumbnail != null ? bookForm.value.thumbnail : noImageAvailablePicturePath }}">
         </mat-grid-tile>
