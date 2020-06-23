@@ -53,7 +53,7 @@ export class BooksCatalogComponent implements OnInit {
         b => {
           if (b.pagingInfo.totalItems > 0) {
             this.totalResults = b.pagingInfo.totalItems;
-            this.booksCatalogSearchResult = b.booksCatalog.bookDetails;;
+            this.booksCatalogSearchResult = b.booksCatalog.bookDetails;
           }
 
           this.showNoResultsMessage = b.pagingInfo.totalItems == 0;
