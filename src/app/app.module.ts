@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { BookDetailsComponent } from './book-details/book-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     MatButtonModule,
     ReactiveFormsModule,
+    FlexLayoutModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'books/catalog', pathMatch: 'full' },
       { path: 'books/catalog', component: BooksCatalogComponent },

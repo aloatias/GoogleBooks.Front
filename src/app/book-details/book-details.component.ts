@@ -11,6 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 export class BookDetailsComponent implements OnInit {
   public noImageAvailablePicturePath: string = "assets/no_image.png";
 
+  public authorsText: string = "Written by ";
+
   public bookForm = new FormGroup({
     id: new FormControl(''),
     title: new FormControl(''),
@@ -48,7 +50,17 @@ export class BookDetailsComponent implements OnInit {
   private getBookDetails() : void {
     this._route.paramMap.subscribe(params => {
       this._bookService.getBookDetails(params.get('id')).subscribe(book => {
-        this.bookForm.patchValue(book)
+        this.bookForm.patchValue(book);
+
+        for (let i = 0; i < book.authors.length; i++) {
+          this.authorsText += book.authors[i];
+
+          if (i + 1 < book.authors.length - 1) {
+            this.authorsText += ", ";
+          } else if (i < book.authors.length - 1){
+            this.authorsText += " and ";
+          }
+        }
       });
     });
   }

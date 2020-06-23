@@ -1,13 +1,17 @@
 <form [formGroup]="bookForm">
-    <h1 style="text-align: center;">{{ bookForm.value.title }}</h1>
+    <h1 style="text-align: center; padding-top: 50px;">{{ bookForm.value.title }}</h1>
+    
+    <div style="text-align: center;">
+       {{ authorsText }}
 
-    <mat-grid-list cols="5" [rowHeight]="">
-        <mat-grid-tile [rowspan]="1" [colspan]="1">
+        <p>From {{ bookForm.value.publisher }}</p>
+    </div>
+
+    <div class="container" fxLayout fxLayout.xs="column" fxLayoutGap="50px" style="margin: 50px 50px 50px 50px">
+        <div class="item item-1">
             <img src="{{ bookForm.value.thumbnail != null ? bookForm.value.thumbnail : noImageAvailablePicturePath }}">
-        </mat-grid-tile>
-
-        <mat-grid-tile [rowspan]="2" [colspan]="4">
-            <div [innerHTML]="bookForm.value.description"></div>
-        </mat-grid-tile>
-    </mat-grid-list>
+        </div>
+        
+        <div class="item item-2" [innerHTML]="bookForm.value.description"></div>
+    </div>
 </form>
