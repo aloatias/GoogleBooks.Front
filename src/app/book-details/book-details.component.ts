@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BooksService } from '../books.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { IBookDetails } from '../Dtos/IBookDetails';
 
 @Component({
   selector: 'app-book-details',
@@ -61,24 +62,29 @@ export class BookDetailsComponent implements OnInit {
       this._bookService.getBookDetails(params.get("id")).subscribe(book => {
         this.bookForm.patchValue(book);
 
-        // Set price message
-        this.calculatedPrice = this.bookForm.value.price !== null ? 
-          this.bookForm.value.price + " " + this.bookForm.value.currencyCode : 
-          "No available price"
-
-        // Set authors and publisher message
-        for (let i = 0; i < book.authors.length; i++) {
-          this.authorsText += book.authors[i];
-
-          if (i + 1 < book.authors.length) {
-            this.authorsText += this._commaSeparator;
-          }
-        }
-
-        // Replace last ", " for " and "
-        var n = this.authorsText.lastIndexOf(this._commaSeparator);
-        this.authorsText =  this.authorsText.slice(0, n) +  this.authorsText.slice(n).replace(this._commaSeparator, this._andSeparator);
+        this.setPriceMessage();
+        this.setAuthorMessage(book);
       });
     });
+  }
+
+  private setAuthorMessage(book: IBookDetails) {
+    for (let i = 0; i < book.authors.length; i++) {
+      this.authorsText += book.authors[i];
+
+      if (i + 1 < book.authors.length) {
+        this.authorsText += this._commaSeparator;
+      }
+    }
+
+    // Replace last ", " for " and "
+    var n = this.authorsText.lastIndexOf(this._commaSeparator);
+    this.authorsText = this.authorsText.slice(0, n) + this.authorsText.slice(n).replace(this._commaSeparator, this._andSeparator);
+  }
+
+  private setPriceMessage() {
+    this.calculatedPrice = this.bookForm.value.price !== null ?
+      this.bookForm.value.price + " " + this.bookForm.value.currencyCode :
+      "No available price";
   }
 }
