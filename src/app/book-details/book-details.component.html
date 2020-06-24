@@ -1,17 +1,18 @@
 <form [formGroup]="bookForm">
-    <div class="body" style="margin: 50px">
+    <div style="margin: 50px">
         <h1 style="text-align: center; padding-top: 50px;">{{ bookForm.value.title }}</h1>
 
         <div style="text-align: center; font-size: small;">
             Written by {{ authorsText }}
 
-            <p>From {{ bookForm.value.publisher }}</p>
+            <p *ngIf="bookForm.value.publisher !== ''">{{ this.publisherText }}</p>
         </div>
 
         <div class="container" fxLayout fxLayout.xs="column" fxLayoutGap="50px">
             <div fxLayout.xs="column">
                 <div style="text-align: center;">
-                    <img src="{{ bookForm.value.thumbnail != null ? bookForm.value.thumbnail : noImageAvailablePicturePath }}">
+                    <img
+                        src="{{ bookForm.value.thumbnail != null ? bookForm.value.thumbnail : noImageAvailablePicturePath }}">
                 </div>
 
                 <div>
@@ -22,7 +23,7 @@
                 </div>
             </div>
 
-            <div fxLayout="column">
+            <div fxLayout="column" fxFlex="100">
                 <h2>Description</h2>
 
                 <div [innerHTML]="bookForm.value.description"></div>
@@ -33,7 +34,7 @@
                     <h2>Additional Information</h2>
 
                     <div class="container" fxLayout fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="50px">
-                        <div fxLayout.xs="column">
+                        <div fxLayout.xs="column" fxFlex.xs="100" fxFlex.sm="100" fxFlex="50">
                             <div>
                                 <span style="font-weight: 500;">Author(s)</span>
                             </div>
@@ -42,8 +43,8 @@
                                 {{ authorsText }}
                             </div>
                         </div>
-                        
-                        <div fxLayout.xs="column">
+
+                        <div fxLayout.xs="column" fxFlex.xs="100" fxFlex.sm="100" fxFlex="20">
                             <div>
                                 <span style="font-weight: 500;">Editor</span>
                             </div>
@@ -53,7 +54,7 @@
                             </div>
                         </div>
 
-                        <div fxLayout.xs="column">
+                        <div fxLayout.xs="column" fxFlex.xs="100" fxFlex.sm="100" fxFlex="20">
                             <div>
                                 <span style="font-weight: 500;">Publishing date</span>
                             </div>
@@ -63,17 +64,31 @@
                             </div>
                         </div>
 
-                        <div fxLayout.xs="column">
+                        <div fxLayout.xs="column" fxFlex.xs="100" fxFlex.sm="100" fxFlex="10">
                             <div>
-                                <span style="font-weight: 500;">Pages</span>
+                                <span style="font-weight: 500;">Price</span>
                             </div>
 
                             <div>
-                                {{ bookForm.value.pageCount }}
+                                {{ calculatedPrice }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <p></p>
+
+                    <div class="container" fxLayout fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="50px">
+                        <div fxLayout.xs="column" fxFlex.xs="100" fxFlex.sm="100" fxFlex="50">
+                            <div>
+                                <span style="font-weight: 500;">Genre</span>
+                            </div>
+
+                            <div>
+                                {{ bookForm.value.categories }}
                             </div>
                         </div>
 
-                        <div fxLayout.xs="column">
+                        <div fxLayout.xs="column" fxFlex.xs="100" fxFlex.sm="100" fxFlex="20">
                             <div>
                                 <span style="font-weight: 500;">Language</span>
                             </div>
@@ -83,15 +98,17 @@
                             </div>
                         </div>
 
-                        <div fxLayout.xs="column">
+                        <div fxLayout.xs="column" fxFlex.xs="100" fxFlex.sm="100" fxFlex="20">
                             <div>
-                                <span style="font-weight: 500;">Genre</span>
+                                <span style="font-weight: 500;">Pages</span>
                             </div>
 
                             <div>
-                                {{ bookForm.value.categories }}
+                                {{ bookForm.value.pageCount }}
                             </div>
                         </div>
+
+                        <div fxLayout.xs="column" fxFlex.xs="100" fxFlex.sm="100" fxFlex="10"></div>
                     </div>
                 </div>
 
