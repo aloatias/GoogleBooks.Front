@@ -5,7 +5,6 @@ import { Observable, throwError } from 'rxjs';
 import { Urls } from './Shared/BaseUrl';
 import { catchError } from 'rxjs/operators';
 import { IBooksCatalogSearchResult } from './Dtos/IBooksCatalogSearchResult';
-import { BooksCatalogComponent } from './books-catalog/books-catalog.component';
 import { IBookDetails } from './Dtos/IBookDetails';
 
 const httpOptions = {

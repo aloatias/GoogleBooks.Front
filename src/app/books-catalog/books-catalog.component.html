@@ -26,18 +26,20 @@
                 [colspan]="colSpan"
                 [rowspan]="rowSpan"
                 [style.background]="color">
-    
-                <div class="book-item" (click)="openDialog(book.id)">
-                    <img src="{{ book.thumbnail != null ? book.thumbnail : noImageAvailablePicturePath }}" style="width: 160px;">
-    
-                    <mat-grid-tile-footer style="background-color: white; color: black;">
-                        <div style="margin-top: 20px;">
-                            <h4 style="text-align: center;">{{ book.title.length <= 60 ? book.title : book.title.substring(0, 59) + "..." }}</h4>
-                        </div>
-                    </mat-grid-tile-footer>
+
+                <div class="book-item">
+                    <a [routerLink]="['/books/details/', book.id]">
+                        <img src="{{ book.thumbnail != null ? book.thumbnail : noImageAvailablePicturePath }}" style="width: 160px;">
+        
+                        <mat-grid-tile-footer style="background-color: white; color: black;">
+                            <div style="margin-top: 20px;">
+                                <h4 style="text-align: center;">{{ book.title.length <= 60 ? book.title : book.title.substring(0, 59) + "..." }}</h4>
+                            </div>
+                        </mat-grid-tile-footer>
+                    </a>
                 </div>
             </mat-grid-tile>
-        </mat-grid-list>   
+        </mat-grid-list>
     </div>
 
     <div [hidden]="!showNoResultsMessage" style="text-align: center; margin: 21% 0px 21% 0px;">

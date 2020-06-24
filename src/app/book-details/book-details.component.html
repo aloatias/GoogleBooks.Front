@@ -1,22 +1,110 @@
 <form [formGroup]="bookForm">
-    <h1 mat-dialog-title style="text-align: center;">{{ bookForm.value.title }}</h1>
+    <div class="body" style="margin: 50px">
+        <h1 style="text-align: center; padding-top: 50px;">{{ bookForm.value.title }}</h1>
 
-    <div mat-dialog-content>
-        <mat-grid-list cols="5" rowHeight="100px">
-            <mat-grid-tile [rowspan]="2" [colspan]="1">
-                <img src="{{ bookForm.value.thumbnail != null ? bookForm.value.thumbnail : noImageAvailablePicturePath }}"
-                    style="width: 160px;">
-            </mat-grid-tile>
+        <div style="text-align: center; font-size: small;">
+            Written by {{ authorsText }}
 
-            <mat-grid-tile [rowspan]="2" [colspan]="4"></mat-grid-tile>
-        </mat-grid-list>
+            <p>From {{ bookForm.value.publisher }}</p>
+        </div>
 
-        <mat-grid-list cols="1" [rowHeight]="bookForm.value.description != null ? (bookForm.value.description.length / 2) - (bookForm.value.description.length / 8) + 'px' : 100 + 'px'" style="margin-top: 20px;">
-            <mat-grid-tile [rowspan]="1" [colspan]="1">
-                <div style="height: 100%;"
-                    [innerHTML]="bookForm.value.description">
+        <div class="container" fxLayout fxLayout.xs="column" fxLayoutGap="50px">
+            <div fxLayout.xs="column">
+                <div style="text-align: center;">
+                    <img src="{{ bookForm.value.thumbnail != null ? bookForm.value.thumbnail : noImageAvailablePicturePath }}">
                 </div>
-            </mat-grid-tile>
-        </mat-grid-list>
+
+                <div>
+                    <p style="text-align: center;">
+                        <span *ngIf="bookForm.value.price !== null">Price </span>
+                        <span style="color: #B12704; font-size: larger;">{{ calculatedPrice }}</span>
+                    </p>
+                </div>
+            </div>
+
+            <div fxLayout="column">
+                <h2>Description</h2>
+
+                <div [innerHTML]="bookForm.value.description"></div>
+
+                <div class="separator"></div>
+
+                <div>
+                    <h2>Additional Information</h2>
+
+                    <div class="container" fxLayout fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="50px">
+                        <div fxLayout.xs="column">
+                            <div>
+                                <span style="font-weight: 500;">Author(s)</span>
+                            </div>
+
+                            <div>
+                                {{ authorsText }}
+                            </div>
+                        </div>
+                        
+                        <div fxLayout.xs="column">
+                            <div>
+                                <span style="font-weight: 500;">Editor</span>
+                            </div>
+
+                            <div>
+                                {{ bookForm.value.publisher }}
+                            </div>
+                        </div>
+
+                        <div fxLayout.xs="column">
+                            <div>
+                                <span style="font-weight: 500;">Publishing date</span>
+                            </div>
+
+                            <div>
+                                {{ bookForm.value.publishedDate }}
+                            </div>
+                        </div>
+
+                        <div fxLayout.xs="column">
+                            <div>
+                                <span style="font-weight: 500;">Pages</span>
+                            </div>
+
+                            <div>
+                                {{ bookForm.value.pageCount }}
+                            </div>
+                        </div>
+
+                        <div fxLayout.xs="column">
+                            <div>
+                                <span style="font-weight: 500;">Language</span>
+                            </div>
+
+                            <div>
+                                {{ bookForm.value.language }}
+                            </div>
+                        </div>
+
+                        <div fxLayout.xs="column">
+                            <div>
+                                <span style="font-weight: 500;">Genre</span>
+                            </div>
+
+                            <div>
+                                {{ bookForm.value.categories }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item item-5">
+                    <div class="separator"></div>
+                </div>
+
+                <h2>Google books</h2>
+
+                <div>
+                    <p><a href="{{ bookForm.value.webReaderLink }}">Know more...</a></p>
+                </div>
+            </div>
+        </div>
     </div>
 </form>
