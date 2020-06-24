@@ -12,9 +12,11 @@ export class BookDetailsComponent implements OnInit {
   public noImageAvailablePicturePath: string = "assets/no_image.png";
 
   // Authors text variables
-  public authorsText: string = "Written by ";
+  public authorsText: string = "";
   private _commaSeparator: string = ", ";
   private _andSeparator: string = " and ";
+
+  public calculatedPrice: string = "";
 
   // BookDetails form
   public bookForm = new FormGroup({
@@ -40,7 +42,10 @@ export class BookDetailsComponent implements OnInit {
     amount: new FormControl(''),
     webReaderLink: new FormControl(''),
     smallThumbnail: new FormControl(''),
-    thumbnail: new FormControl('')
+    thumbnail: new FormControl(''),
+    price: new FormControl(''),
+    currencyCode: new FormControl(''),
+    categories: new FormControl('')
   });
 
   constructor(
@@ -53,9 +58,15 @@ export class BookDetailsComponent implements OnInit {
   
   private getBookDetails() : void {
     this._route.paramMap.subscribe(params => {
-      this._bookService.getBookDetails(params.get('id')).subscribe(book => {
+      this._bookService.getBookDetails(params.get("id")).subscribe(book => {
         this.bookForm.patchValue(book);
 
+        // Set price message
+        this.calculatedPrice = this.bookForm.value.price !== null ? 
+          this.bookForm.value.price + " " + this.bookForm.value.currencyCode : 
+          "No available price"
+
+        // Set authors and publisher message
         for (let i = 0; i < book.authors.length; i++) {
           this.authorsText += book.authors[i];
 
