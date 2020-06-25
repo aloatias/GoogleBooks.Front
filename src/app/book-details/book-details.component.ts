@@ -14,6 +14,7 @@ export class BookDetailsComponent implements OnInit {
 
   // Authors text variables
   public authorsText: string = "";
+  public publisherText: string = "From ";
   private _commaSeparator: string = ", ";
   private _andSeparator: string = " and ";
 
@@ -64,8 +65,13 @@ export class BookDetailsComponent implements OnInit {
 
         this.setPriceMessage();
         this.setAuthorMessage(book);
+        this.setPublisherMessage();
       });
     });
+  }
+
+  private setPublisherMessage() {
+    this.publisherText += this.bookForm.value.publisher;
   }
 
   private setAuthorMessage(book: IBookDetails) {
