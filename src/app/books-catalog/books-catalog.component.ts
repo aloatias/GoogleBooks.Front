@@ -17,7 +17,7 @@ export class BooksCatalogComponent implements OnInit {
   public color: string = "white";
   public noImageAvailablePicturePath: string = "assets/no_image.png";
 
-  public keywords: string = "Angular development";
+  public keywords: string = "";
   public totalResults: number;
   public pageSize: number = 40;
   public pageNumber: number = 0;
@@ -34,16 +34,16 @@ export class BooksCatalogComponent implements OnInit {
     private _booksService: BooksService) { }
 
   ngOnInit(): void {
-    this.getBooksCatalog();
   }
 
-  public getBooksCatalog(): void {
-    if (this.keywords.length < 2) {
+  public getBooksCatalog(keywords: string): void {
+    if (keywords.length < 2) {
       alert("You have to enter at least a two letter long keyword");
       return
     }
-
     this.showSpinner = true;
+
+    this.keywords = keywords;
 
     let booksCatalogSearchOptions = this.getBooksCatalogSearchOptions();
 
@@ -70,7 +70,7 @@ export class BooksCatalogComponent implements OnInit {
     this.pageNumber = event.pageIndex;
     this.pageSize = event.pageSize;
 
-    this.getBooksCatalog();
+    this.getBooksCatalog(this.keywords);
     return event;
   }
 }

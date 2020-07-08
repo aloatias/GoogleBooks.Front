@@ -16,12 +16,14 @@ import { BookDetailsComponent } from './book-details/book-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { BooksSearchBarComponent } from './books-search-bar/books-search-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BooksCatalogComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
+    BooksSearchBarComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
       { path: '**', redirectTo:'books/catalog', pathMatch: 'full' }
     ])
   ],
-  providers: [],
+  providers: [BooksCatalogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
