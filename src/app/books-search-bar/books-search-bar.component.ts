@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GlobalParameters } from '../Shared/GlobalParameters';
 import { Global } from '../Shared/Global';
 
 @Component({
@@ -12,17 +11,14 @@ export class BooksSearchBarComponent implements OnInit {
   public keywords: string;
 
   constructor(
-    private _router: Router,
-    private _globalParams: GlobalParameters
-  ) 
-  {}
+    private _router: Router
+  ) { }
 
   ngOnInit() {
-    this.keywords = this._globalParams.keywords;
+    this.keywords = Global.defaultKeywords;
   }
 
-  public getBooksCatalog() : void {
-    this._globalParams.keywords = this.keywords;
-    this._router.navigate(["books/catalog/", this._globalParams.keywords]);
+  public getBooksCatalog(): void {
+    this._router.navigate(["books/catalog/", this.keywords]);
   }
 }
