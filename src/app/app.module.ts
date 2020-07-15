@@ -16,12 +16,15 @@ import { BookDetailsComponent } from './book-details/book-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { BooksSearchBarComponent } from './books-search-bar/books-search-bar.component';
+import { GlobalParameters } from './Shared/GlobalParameters';
 
 @NgModule({
   declarations: [
     AppComponent,
     BooksCatalogComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
+    BooksSearchBarComponent
   ],
   imports: [
     BrowserModule,
@@ -38,13 +41,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ReactiveFormsModule,
     FlexLayoutModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: 'books/catalog', pathMatch: 'full' },
-      { path: 'books/catalog', component: BooksCatalogComponent },
-      { path: 'books/details/:id', component: BookDetailsComponent },
-      { path: '**', redirectTo:'books/catalog', pathMatch: 'full' }
+      { path: '', redirectTo: 'books/catalog/Angular%20development', pathMatch: 'full' },
+      { path: 'books/catalog/:keywords', component: BooksCatalogComponent },
+      { path: 'book/details/:id', component: BookDetailsComponent },
+      { path: '**', redirectTo:'books/catalog/Angular%20development', pathMatch: 'full' }
     ])
   ],
-  providers: [],
+  providers: [BooksCatalogComponent, GlobalParameters],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
