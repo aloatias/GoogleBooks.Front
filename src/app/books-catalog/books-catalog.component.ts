@@ -3,6 +3,7 @@ import { BooksService } from '../books.service';
 import { BooksCatalogSearch } from '../Dtos/BooksCatalogSearch';
 import { BooksDetailsForCatalog } from '../Dtos/BooksDetailsForCatalog';
 import { PageEvent } from '@angular/material/paginator';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-books-catalog',
@@ -29,21 +30,26 @@ export class BooksCatalogComponent implements OnInit {
   public showNoResultsMessage: boolean = false;
 
   public bookId: string;
-
+  
   constructor(
+    private _route: ActivatedRoute,
     private _booksService: BooksService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this._route.params.subscribe(routeParams => {
+      this.keywords = routeParams.keywords
+
+      this.getBooksCatalog();
+    });
   }
 
-  public getBooksCatalog(keywords: string): void {
-    if (keywords.length < 2) {
+  public getBooksCatalog(): void {
+    if (this.keywords.length < 2) {
       alert("You have to enter at least a two letter long keyword");
       return
     }
-    this.showSpinner = true;
 
-    this.keywords = keywords;
+    this.showSpinner = true;
 
     let booksCatalogSearchOptions = this.getBooksCatalogSearchOptions();
 
@@ -70,7 +76,7 @@ export class BooksCatalogComponent implements OnInit {
     this.pageNumber = event.pageIndex;
     this.pageSize = event.pageSize;
 
-    this.getBooksCatalog(this.keywords);
+    this.getBooksCatalog();
     return event;
   }
 }

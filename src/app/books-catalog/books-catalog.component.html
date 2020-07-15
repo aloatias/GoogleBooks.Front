@@ -12,7 +12,7 @@
                 [style.background]="color">
 
                 <div class="book-item">
-                    <a [routerLink]="['/books/details/', book.id]">
+                    <a [routerLink]="['/book/details/', book.id]">
                         <img src="{{ book.thumbnail != null ? book.thumbnail : noImageAvailablePicturePath }}" style="width: 160px;">
         
                         <mat-grid-tile-footer style="background-color: white; color: black;">
@@ -29,7 +29,7 @@
     <div [hidden]="!showNoResultsMessage" style="text-align: center; margin: 21% 0px 21% 0px;">
         <h2>No results were found</h2>
     </div>
-    
+
     <div id="paginator" style="margin-top: 10px;">
         <mat-paginator style="background-color: black; color: white" [length]="totalResults"
                     [pageSize]="pageSize"

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BooksCatalogComponent } from '../books-catalog/books-catalog.component';
+import { Router } from '@angular/router';
+import { GlobalParameters } from '../Shared/GlobalParameters';
+import { Global } from '../Shared/Global';
 
 @Component({
   selector: 'app-books-search-bar',
@@ -7,15 +9,20 @@ import { BooksCatalogComponent } from '../books-catalog/books-catalog.component'
   styleUrls: ['./books-search-bar.component.css']
 })
 export class BooksSearchBarComponent implements OnInit {
-  public keywords: string = "Angular development";
+  public keywords: string;
 
-  constructor(private _booksCatalog: BooksCatalogComponent) { }
+  constructor(
+    private _router: Router,
+    private _globalParams: GlobalParameters
+  ) 
+  {}
 
-  ngOnInit(): void {
-    this.getBooksCatalog();
+  ngOnInit() {
+    this.keywords = this._globalParams.keywords;
   }
 
   public getBooksCatalog() : void {
-    this._booksCatalog.getBooksCatalog(this.keywords);
+    this._globalParams.keywords = this.keywords;
+    this._router.navigate(["books/catalog/", this._globalParams.keywords]);
   }
 }
