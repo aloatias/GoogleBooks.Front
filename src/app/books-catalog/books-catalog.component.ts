@@ -3,6 +3,7 @@ import { BooksService } from '../books.service';
 import { BooksCatalogSearch } from '../Dtos/BooksCatalogSearch';
 import { BooksDetailsForCatalog } from '../Dtos/BooksDetailsForCatalog';
 import { PageEvent } from '@angular/material/paginator';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-books-catalog',
@@ -17,7 +18,7 @@ export class BooksCatalogComponent implements OnInit {
   public color: string = "white";
   public noImageAvailablePicturePath: string = "assets/no_image.png";
 
-  public keywords: string = "Angular development";
+  public keywords: string = "";
   public totalResults: number;
   public pageSize: number = 40;
   public pageNumber: number = 0;
@@ -29,12 +30,17 @@ export class BooksCatalogComponent implements OnInit {
   public showNoResultsMessage: boolean = false;
 
   public bookId: string;
-
+  
   constructor(
+    private _route: ActivatedRoute,
     private _booksService: BooksService) { }
 
-  ngOnInit(): void {
-    this.getBooksCatalog();
+  ngOnInit() {
+    this._route.params.subscribe(routeParams => {
+      this.keywords = routeParams.keywords
+
+      this.getBooksCatalog();
+    });
   }
 
   public getBooksCatalog(): void {
