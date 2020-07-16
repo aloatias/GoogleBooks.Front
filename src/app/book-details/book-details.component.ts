@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { BooksService } from '../books.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { IBookDetails } from '../Dtos/IBookDetails';
 
 @Component({
   selector: 'app-book-details',
