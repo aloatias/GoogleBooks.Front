@@ -64,7 +64,7 @@ export class BookDetailsComponent implements OnInit {
         this.bookForm.patchValue(book);
 
         this.setPriceMessage();
-        this.setAuthorMessage(book);
+        this.setAuthorMessage(book.authors);
         this.setPublisherMessage();
       });
     });
@@ -74,14 +74,8 @@ export class BookDetailsComponent implements OnInit {
     this.publisherText += this.bookForm.value.publisher;
   }
 
-  private setAuthorMessage(book: IBookDetails) {
-    for (let i = 0; i < book.authors.length; i++) {
-      this.authorsText += book.authors[i];
-
-      if (i + 1 < book.authors.length) {
-        this.authorsText += this._commaSeparator;
-      }
-    }
+  private setAuthorMessage(authors: string[]) {
+    this.authorsText = authors.join(", ");
 
     // Replace last ", " for " and "
     var n = this.authorsText.lastIndexOf(this._commaSeparator);
