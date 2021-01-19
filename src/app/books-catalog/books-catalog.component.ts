@@ -56,12 +56,16 @@ export class BooksCatalogComponent implements OnInit {
     this._booksService.getBooksCatalog(booksCatalogSearchOptions)
       .subscribe(
         b => {
-          if (b.pagingInfo.totalItems > 0) {
-            this.totalResults = b.pagingInfo.totalItems;
-            this.booksCatalogSearchResult = b.booksCatalog.bookDetails;
+          if (b != null)
+          {
+            if (b.pagingInfo.totalItems > 0) {
+              this.totalResults = b.pagingInfo.totalItems;
+              this.booksCatalogSearchResult = b.booksCatalog.bookDetails;
+              this.showNoResultsMessage = false;
+            }
+          } else {
+            this.showNoResultsMessage = true;
           }
-
-          this.showNoResultsMessage = b.pagingInfo.totalItems == 0;
 
           this.showSpinner = false;
         }

@@ -39,11 +39,11 @@ export class BooksService {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       // client-side error
-      errorMessage = `Error: ${error.error.message}`;
+      errorMessage = `Error: ${ error.error.message }`;
     } else {
       // server-side error
       if (error.status !== 500) {
-        errorMessage = error.error;
+        errorMessage = error.error["errorMessage"];
       } else {
         errorMessage = "Un error occurred. Please try again later";
       }
